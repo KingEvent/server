@@ -4,7 +4,7 @@ if (process.env.NODE_ENV === 'development'){
 
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const mongoURI = process.env.MONGO_URI;
 const mongoose = require('mongoose');
 const cors = require('cors');
