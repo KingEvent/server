@@ -3,7 +3,7 @@ const validationErr = require('../helpers/validationErr');
 module.exports = {
     errorHandler: function(error, req, res, next) {
         console.log(JSON.stringify(error, null, 2))
-        // console.log(error)
+        console.log(error)
         let statusCode;
         let messageError = [];
 

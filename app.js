@@ -20,11 +20,11 @@ mongoose
     .connect(mongoURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex: true,
+        useCreateIndex: true, 
         useFindAndModify: false
     })
-    .then(_ => console.log('connected to database.'))
-    .catch(_ => console.log('database connection failed.'));
+    .then(_ => console.log('connected to database.')) 
+    .catch(_ => console.log('database connection failed.') );
     
 
 app.use(morgan('dev'));

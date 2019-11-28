@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const validateEmail = require('../helper/email')
-const makePass = require('../helpers/bcrypt')
+const validateEmail = require('../helpers/email')
+const { makePass } = require('../helpers/bcrypt')
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -22,11 +22,11 @@ const UserSchema = new mongoose.Schema({
     }
 })
 
-TransactionSchema.pre('save', (next) => {
-
+UserSchema.pre('save', function(next) {
     this.password = makePass(this.password)
-
-    next()
+    // console.log(this.password)
+    next() // not a best practice, besok tanya lagi ke Ka Dimitri atau Ka Hardim
+    // console.log(this)
 });
 
 module.exports = mongoose.model('User', UserSchema)
