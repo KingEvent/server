@@ -11,6 +11,7 @@ const cors = require('cors');
 const routes = require('./routes');
 const morgan = require('morgan');
 const { errorHandler } = require('./middlewares/errorHandler');
+const googleOAuthLogin = require('./controllers/googleOAuth');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -29,6 +30,8 @@ mongoose
 
 app.use(morgan('dev'));
 app.use('/', routes);
+
+app.post('/google-signin', googleOAuthLogin.googleOAuth);
 
 app.use((req, res, next) => {
     const err = {
