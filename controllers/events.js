@@ -12,6 +12,7 @@ class EventsController {
       headers: {Authorization: `Bearer p80xYIadCDRhpaOItRRzDuyKpv8EjrVObapVLmCJ`}
     })
     .then(concerts => {
+      console.log(concerts)
       res.status(200).json(concerts.data.results)
     })
     .catch(err => {
