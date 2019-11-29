@@ -4,7 +4,7 @@ if (process.env.NODE_ENV === 'development'){
 
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const mongoURI = process.env.MONGO_URI;
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -21,11 +21,11 @@ mongoose
     .connect(mongoURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex: true,
+        useCreateIndex: true, 
         useFindAndModify: false
     })
-    .then(_ => console.log('connected to database.'))
-    .catch(_ => console.log('database connection failed.'));
+    .then(_ => console.log('connected to database.')) 
+    .catch(_ => console.log('database connection failed.') );
     
 
 app.use(morgan('dev'));

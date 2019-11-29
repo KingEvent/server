@@ -1,9 +1,9 @@
 const validationErr = require('../helpers/validationErr');
 
 module.exports = {
-    errorHandler: function(error, req, res, next) {
+    errorHandler: function (error, req, res, next) {
         console.log(JSON.stringify(error, null, 2))
-        // console.log(error)
+        console.log(error)
         let statusCode;
         let messageError = [];
 
@@ -16,14 +16,22 @@ module.exports = {
                 statusCode = 400;
                 message = error.message;
                 break;
+            case 'Password incorrect':
+                statusCode = 403;
+                messageError = "Password incorrect"
+                break;
+            case 'MongoError':
+                statusCode = 409;
+                messageError = "This email is taken."
+                break;
             default:
                 statusCode = error.status || 500;
                 messageError = error.msg || 'Internal Server Error';
                 break;
         }
-        
+
         res.status(statusCode).json({
-            message : messageError
+            message: messageError
         })
     }
 }
