@@ -11,27 +11,40 @@ class Controller {
         User.create(obj)
             .then((data) => {
                 console.log(data)
-                console.log('cobacoba');
+                // console.log('cobacoba');
                 res.status(201).json(data)
 
-            }).catch(next);
+            })
+            .catch(next);
     }
 
     static login(req, res, next) {
-        User.findOne({username: req.body.username})
+        User.findOne({ username: req.body.username })
             .then((user) => {
-                if (!user || user.length == 0) throw { message: "user not found" }
+                if (!user || user.length == 0) {
+                    let err = {
+                        status: 404,
+                        msg: `Your username not match to any user's account`
+                    }
+                    next(err)
+                }//throw { message: "user not found" }
                 console.log(user);
                 let check = checkPass(req.body.password, user.password)
                 let token = ''
 
                 if (check) {
                     token = genToken({ id: user.id })
+                    res.status(200).json({ token })
                 } else {
-                    throw { message: "Password incorrect" }
+                    let err = {
+                        status: 403,
+                        msg: 'Password Incorrect'
+                    }
+                    // console.log('masuk');
+                    next(err)
+                    // throw { name: "Password incorrect" }
                 }
 
-                res.status(200).json({token})
             }).catch((next));
     }
 
