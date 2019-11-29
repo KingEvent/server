@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 const mongoURI = process.env.MONGO_URI;
 const mongoose = require('mongoose');
 const cors = require('cors');
-const routes = require('./routes');
+const routes = require('./routes/index');
 const morgan = require('morgan');
 const { errorHandler } = require('./middlewares/errorHandler');
 const googleOAuthLogin = require('./controllers/googleOAuth');
@@ -43,6 +43,6 @@ app.use((req, res, next) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`listening on port PORT`));
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 
 module.exports = app
