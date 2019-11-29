@@ -6,13 +6,14 @@ class EventsController {
 
   static showAll(req, res) {
     // ?within=${dist}km@${long},${lat}
+    console.log(req.query)
     axios({
       method: 'get',
-      url: `https://api.predicthq.com/v1/events/`,
+      url: `https://api.predicthq.com/v1/events/?within=100km@${req.query.lat},${req.query.lon}`,
       headers: {Authorization: `Bearer p80xYIadCDRhpaOItRRzDuyKpv8EjrVObapVLmCJ`}
     })
     .then(concerts => {
-      console.log(concerts)
+      console.log(concerts.data.results)
       res.status(200).json(concerts.data.results)
     })
     .catch(err => {

@@ -3,7 +3,8 @@ const calendarAxios = require('../config/calendarAPI');
 class CalendarController {
     static addToCalendar(req, res, next) {
         let calendarId;
-        const { token } = req.body;
+        console.log(req.body)
+        const { token, venue, start, end } = req.body;
 
         calendarAxios({
             method: 'get',
@@ -13,6 +14,7 @@ class CalendarController {
             }
         })
         .then(({data}) => {
+            console.log(data)
             calendarId = data.objects[0].id
             return calendarAxios({
                 method: 'post',
@@ -21,9 +23,9 @@ class CalendarController {
                     Authorization: `Bearer ${token}`
                 },
                 data: {
-                    name: 'Test',
-                    start: "2019-12-12T12:30:00Z",
-                    end: "2019-12-12T13:30:00Z",
+                    name: venue,
+                    start: start,
+                    end: end
                 }
             })
         })
