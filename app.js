@@ -43,6 +43,6 @@ app.use((req, res, next) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`listening on port PORT`));
+app.listen(PORT, () => console.log(`listening on port PORT ${PORT}`));
 
 module.exports = app
